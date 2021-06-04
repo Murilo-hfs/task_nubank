@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:task_nubank/app/controllers/date_controller.dart';
+import 'package:task_nubank/app/controllers/text_controller.dart';
+import 'package:task_nubank/app/utils/app_routes.dart';
 import 'package:task_nubank/app/widgets/comprove_widget.dart';
 
-class ConfirmPayment extends StatefulWidget {
-  @override
-  _ConfirmPaymentState createState() => _ConfirmPaymentState();
-}
-
-class _ConfirmPaymentState extends State<ConfirmPayment> {
+class ConfirmPayment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final dateController = Provider.of<DateController>(context).dateController;
+    final textController = Provider.of<TextController>(context).textController;
     return Scaffold(
       appBar: AppBar(
         title: Text('Confirmar Pagamento'),
+        actions: [
+          ElevatedButton.icon(
+            label: Text('Home'),
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: [
             ComproveWidget(
               msg1: "Valor",
@@ -22,7 +32,7 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
             ),
             ComproveWidget(
               msg1: "Agendado para",
-              msg2: '02 JUN 2021',
+              msg2: '${dateController.text}',
             ),
             ComproveWidget(
               msg1: "Pagador",
@@ -39,15 +49,15 @@ class _ConfirmPaymentState extends State<ConfirmPayment> {
             TextButton.icon(
               icon: Icon(Icons.backup_table_rounded),
               label: Text('Documento'),
-              onPressed: (){},
+              onPressed: () {},
             ),
-             ComproveWidget(
+            ComproveWidget(
               msg1: "Favorecido",
               msg2: 'ALGAR TELECOM',
             ),
-             ComproveWidget(
+            ComproveWidget(
               msg1: "Linha Digitavel",
-              msg2: '23190-9028490238490321042932-38294-902334238497238 ',
+              msg2: '${textController.text}',
             ),
           ],
         ),

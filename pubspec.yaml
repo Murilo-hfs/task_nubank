@@ -32,7 +32,8 @@ dependencies:
   mobx:
   dio:
   flutter_datetime_picker: 
-  intl:  
+  intl: 
+  provider: ^5.0.0   
 
 dev_dependencies:
   build_runner:
